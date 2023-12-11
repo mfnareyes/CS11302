@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>income tax calculator</title>
+    <link rel="stylesheet" href="tax.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,300;1,400;1,500;1,600&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap" rel="stylesheet">
+
+</head>
+<header>
+    <a href="#" class="logo">
+        
+    </a>
+   
+    <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="calcu2.html">Calculator</a></li>
+        <li><a href=".html">Payroll</a></li>
+        <li><a href="nth.html">Nth</a></li>
+        <li><a href="#home">Conversion</a></li>
+        <li><a href="tax.html">Income Tax</a></li>
+    </ul>
+
+    <div class="right-nav">
+        <a href="#" class="right-btn">About Me</a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </div>
+</header>
+
+
+    
+<body>
+    
+    <div class="headertext">
+        <h1 class="heading">INCOME TAX CALCULATOR</h1>
+    </div>
+
+    <div class="container">
+        <form>
+            <label for="taxable-income">Enter your income:</label>
+            <input type="number" id="taxable-income" name="taxable-income" placeholder="ENTER VALUE" required>
+            <button type="button" onclick="calculateTax()">CALCULATE</button>
+
+            <p id="incometax"></p>
+        </form>
+
+    <div class="sampletaxtable">
+        <table>
+            <thead>
+                <tr>
+                    <th>Income Range</th>
+                    <th>Income Tax</th>
+                </tr>
+            </thead>
+            <tbody id="taxTable">
+                <h2 class="incometaxguide">INCOME TAX GUIDE.</h2>
+                <tr>
+                    <td>less than PHP250,000</td>
+                    <td>None</td>
+                </tr>
+                <tr>
+                    <td>PHP250,000 - 400,0000</td>
+                    <td>20% of the excess over PHP250,000</td>
+                <tr>
+                    <td>PHP400,000 - PHP 800,000</td>
+                    <td>PHP30,000 + 25% of the excess over PHP250,000</td>
+                </tr>
+                <tr>
+                    <td>PHP800,000 - 2,000,000</td>
+                    <td>PHP130,000 + 30% of the excess over PHP800,00</td>
+                </tr>
+                <tr>
+                    <td>PHP2,000,000 - 8,000,000</td>
+                    <td>PHP490,000 + 32% of the excess over PHP2,000,000</td>
+                </tr>
+                <tr>
+                    <td>greater than PHP8,000,000</td>
+                    <td>PHP2,410,000 + 35% of the excess over PHP8,000,000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    <script>
+        
+        function calculateTax(inputValue){
+
+            var income = parseFloat(document.getElementById('taxable-income').value); 
+            var tax = document.getElementById('incometax');
+
+            //determine the tax bracket
+            if (income < 250000.00){
+                tax.textContent = 0.00;
+            }
+            else if (income > 250000.00 && income < 400000.00){
+                tax.textContent = ((income - 250000.00) * 0.2).toFixed(2);
+            }
+            else if (income > 400000.00 && income < 800000.00){
+                tax.textContent = (30000.00 + ((income - 400000.00) * 0.25)).toFixed(2);
+            }
+            else if (income > 800000.00 && income < 2000000.00){
+                tax.textContent = (130000.00 + ((income - 800000.00) * 0.3)).toFixed(2);
+            }
+            else if (income > 2000000.00 && income < 80000000.00){
+                tax.textContent = (490000.00 + ((income - 2000000.00) * 0.32)).toFixed(2);
+            }
+            else if (income > 8000000.00){
+                tax.textContent = (2410000.00 + ((income - 8000000.00) * 0.35)).toFixed(2);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,300;1,400;1,500;1,600&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="conversion.css">
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">
+            
+        </a>
+       
+        <ul class="nav">
+            <li><a href="#">Home</a></li>
+            <li><a href="calcu2.html">Calculator</a></li>
+            <li><a href="#home">Payroll</a></li>
+            <li><a href="nth.html">Nth</a></li>
+            <li><a href="#home">Conversion</a></li>
+            <li><a href="tax.html">Income Tax</a></li>
+        </ul>
+
+        <div class="right-nav">
+            <a href="#" class="right-btn">About Me</a>
+            <div class="bx bx-menu" id="menu-icon"></div>
+        </div>
+    </header>
+    
+
+    <div class="converter-container">
+        <label for="conversionType">Choose Conversion Type:</label>
+        <select id="conversionType">
+            <option value="1">Fahrenheit to Celsius</option>
+            <option value="2">Celsius to Fahrenheit</option>
+            <option value="3">Meters to Feet</option>
+            <option value="4">Feet to Meters</option>
+        </select>
+
+        <label for="inputValue">Enter Value:</label>
+        <input type="number" id="inputValue" placeholder="Enter value" required>
+
+        <button onclick="convert()">Convert</button>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function convert() {
+            var conversionType = document.getElementById('conversionType').value;
+            var inputValue = parseFloat(document.getElementById('inputValue').value);
+            var resultElement = document.getElementById('result');
+            var result;
+
+            switch (conversionType) {
+                case '1':
+                    result = (inputValue - 32) * 5/9;
+                    resultElement.textContent = `${inputValue} Fahrenheit is equal to ${result.toFixed(2)} Celsius.`;
+                    break;
+                case '2':
+                    result = (inputValue * 9/5) + 32;
+                    resultElement.textContent = `${inputValue} Celsius is equal to ${result.toFixed(2)} Fahrenheit.`;
+                    break;
+                case '3':
+                    result = inputValue * 3.28084;
+                    resultElement.textContent = `${inputValue} Meters is equal to ${result.toFixed(2)} Feet.`;
+                    break;
+                case '4':
+                    result = inputValue / 3.28084;
+                    resultElement.textContent = `${inputValue} Feet is equal to ${result.toFixed(2)} Meters.`;
+                    break;
+                default:
+                    resultElement.textContent = 'Invalid conversion type.';
+                    break;
+            }
+        }
+    </script>
+
+</body>
+</html>

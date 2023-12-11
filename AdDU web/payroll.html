@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="payroll.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,300;1,400;1,500;1,600&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+        <header>
+            <a href="#" class="logo">
+                
+            </a>
+           
+            <ul class="nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="calcu2.html">Calculator</a></li>
+                <li><a href="payroll.html">Payroll</a></li>
+                <li><a href="nth.html">Nth</a></li>
+                <li><a href="#home">Conversion</a></li>
+                <li><a href="tax.html">Income Tax</a></li>
+            </ul>
+    
+            <div class="right-nav">
+                
+                <div class="bx bx-menu" id="menu-icon"></div>
+            </div>
+        </header>
+    
+        <br>
+        <br>
+         <br>
+        <h1>Payroll Table</h1>
+        
+
+        <br>
+        <label >Employee Name</label><br>
+        <input id="EmployeeIn" type="text"><br>
+        <label >Days</label><br>
+        <input id="DaysIn" type="number"><br>
+        <label >Rate</label><br>
+        <input id="RateIn" type="number"><br>
+        <label >Deduction</label><br>
+        <input id="DeductIn" type="number"><br>
+
+        <button  onclick ="AddEmp()">Add Employee</button><br><br>
+        <label >Index Delete</label><br>
+        <input id="IndDel" type="number"><br>
+        <button onclick ="IndexDel()">Delete Employee</button>
+        <button onclick ="TableDel()">Delete Table</button>
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>No.</td>
+                    <td>Employee Name</td>
+                    <td>Days Worked</td>
+                    <td>Daily Rate</td>
+                    <td>Gross Pay</td>
+                    <td>Deduction Amount</td>
+                    <td>Net Pay</td>
+                </tr>
+            </thead>
+            <tbody id="tableBod">
+
+            </tbody>
+        </table>
+        <br><a href="index.html">Back to Index</a><br><br>
+
+        <dialog id="DiaBox">
+            <form method="dialog">
+                <h1>Delete?</h1>
+                <button id="confirm">Yes</button>
+                <button id="deny" onclick="close()">No</button>
+            </form>
+        </dialog>
+    </body>
+    <script>
+        var Workers=[];
+        function close(){
+            var Close =document.getElementById('DiaBox')
+            Close.close()
+        }
+
+        function TableDel(){
+            var dialog = document.getElementById('DiaBox');
+            dialog.showModal();
+            document.getElementById('confirm').onclick = function () {
+                Workers=[]
+                display()
+             }
+        }
+        
+        function IndexDel(){
+    var index = document.getElementById('IndDel').value;
+    if (index > 0 && index <= Workers.length) {
+        var dialog = document.getElementById('DiaBox');
+        dialog.showModal();
+        document.getElementById('confirm').onclick = function () {
+            Workers.splice(index - 1, 1);
+            display();
+        };
+    }
+}
+
+        function AddEmp(){
+            var EmpName = document.getElementById('EmployeeIn').value
+            var EmpDays = document.getElementById('DaysIn').value*1
+            var EmpRate = document.getElementById('RateIn').value*1
+            var EmpDeduct = document.getElementById('DeductIn').value*1
+            var EmpGross = EmpDays*EmpRate
+            var EmpNet = EmpGross-EmpDeduct
+            const employee={
+                name:EmpName,
+                days:EmpDays,
+                rate:EmpRate,
+                gross:EmpGross,
+                deduct:EmpDeduct,
+                net:EmpNet
+            }
+            Workers.push(employee)
+            display()
+        }
+
+        function display(){
+            const tableBody = document.getElementById('tableBod')
+            tableBody.innerHTML =''
+            for (let i =0; i<Workers.length;i++){
+                tableBody.innerHTML += "<tr><td>"+(i+1)+"</td><td>"+Workers[i].name+"</td><td>"+Workers[i].days+"</td><td>"+Workers[i].rate+"</td><td>"+Workers[i].gross+"</td><td>"+Workers[i].deduct+"</td><td>"+Workers[i].net+"</td></tr>"
+            }
+        }
+    </script>
+</html>
+</body>
+</html>
